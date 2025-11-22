@@ -157,7 +157,7 @@ mesh.compute_vertex_normals()
 # Visualize the mesh
 o3d.visualization.draw(mesh)
 
-# 🟦 3D Model — Overview & Open3D Guide
+## 🟦 3D Model — Overview & Open3D Guide
 
 A **3D Model** is a digital representation of a three-dimensional object or scene.  
 It is used in **animation, movies, video games, architecture, product design, and commercial advertisements**.  

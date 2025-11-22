@@ -140,7 +140,7 @@ These components together define the **height, width, and depth** of a 3D object
 
 ## 🔧 Load & Visualize a 3D Mesh with Open3D
 
-```python
+
 import open3d as o3d
 
 # Load a 3D mesh file

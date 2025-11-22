@@ -29,6 +29,7 @@
 ---
 
 # 🟦 3D Point Cloud — Overview & Open3D Guide
+![Alt Text](images/one.png)
 
 A **Point Cloud** is a collection of points in 3D space representing the geometry, structure, and surface of real-world or simulated objects.  
 Each point contains **X, Y, Z coordinates**, and may also include:

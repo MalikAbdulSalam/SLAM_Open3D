@@ -93,7 +93,6 @@ Used to reduce the number of points for faster computation.
 pcd_down = pcd.voxel_down_sample(voxel_size=0.02)
 o3d.visualization.draw(pcd_down)
 ```
-![Alt Text](images/voxel_downsampling.jpeg)
 ---
 
 # 🟦 3D Mesh — Overview & Open3D Guide

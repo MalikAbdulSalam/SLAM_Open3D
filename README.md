@@ -1,8 +1,5 @@
 # SLAM_Open3D
 # Open3D – Complete Guide with Examples
-
-A clean, structured, and GitHub‑friendly README file for Open3D concepts, operations, and examples.
-
 ---
 
 ## 📌 Table of Contents

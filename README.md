@@ -98,260 +98,62 @@ o3d.visualization.draw(pcd_down)
 
 ---
 
-## 🟦 Outlier Removal
+# 🟦 3D Mesh — Overview & Open3D Guide
 
-Removes noisy points.
+A **3D Mesh** is the structural backbone of a 3D model.  
+It can be created from **point clouds** or designed directly in 3D modeling software.  
 
-### 🔹 Statistical Outlier Removal
+A 3D Mesh is composed of:
 
-```python
-cl, ind = pcd.remove_statistical_outlier(nb_neighbors=20, std_ratio=2.0)
-pcd_clean = pcd.select_by_index(ind)
-o3d.visualization.draw(pcd_clean)
-```
+- **Vertices**: Points in 3D space  
+- **Edges**: Lines connecting vertices  
+- **Faces**: Surfaces defined by edges (usually triangles or quads)  
 
----
-
-## 🟦 KD-Tree
-
-Efficient nearest‑neighbor search.
-
-### 🔹 Example
-
-```python
-pcd_tree = o3d.geometry.KDTreeFlann(pcd)
-[_, idx, _] = pcd_tree.search_knn_vector_3d(pcd.points[0], 10)
-```
+These components together define the **height, width, and depth** of a 3D object.
 
 ---
 
-## 🟦 3D Mesh
+## 🚀 Applications of 3D Mesh
 
-Meshes contain vertices, edges, and triangles.
+3D Meshes are widely used in:
 
-### 🔹 Supported Formats
+- **Computer Graphics & Animation**  
+- **3D Printing**  
+- **Virtual Reality (VR) & Augmented Reality (AR)**  
+- **Simulation & Gaming**  
+- **Medical Imaging & Scientific Visualization**  
+- **Robotics & CAD Modeling**
 
-`.ply`, `.obj`, `.stl`, `.off`, `.gltf`
+---
 
-### 🔹 Load & Visualize
+## 📁 Common 3D Mesh File Formats
+
+| Format | Description |
+|--------|-------------|
+| **.ply** | Polygon File Format (supports point cloud + mesh) |
+| **.stl** | Standard for 3D printing (triangular mesh) |
+| **.obj** | Wavefront OBJ (vertices, faces, textures) |
+| **.off** | Object File Format (geometry representation) |
+| **.gltf / .glb** | Modern format for 3D scenes & models with textures |
+
+---
+
+## 🔧 Load & Visualize a 3D Mesh with Open3D
 
 ```python
-mesh = o3d.io.read_triangle_mesh("model.obj")
+import open3d as o3d
+
+# Load a 3D mesh file
+mesh = o3d.io.read_triangle_mesh("model.ply")
+
+# Print basic information
+print(mesh)
+print("Vertices:", len(mesh.vertices))
+print("Triangles:", len(mesh.triangles))
+
+# Estimate normals (needed for better visualization)
 mesh.compute_vertex_normals()
+
+# Visualize the mesh
 o3d.visualization.draw(mesh)
-```
 
----
-
-## 🟦 Mesh Operations
-
-### 🔹 Surface Normals
-
-```python
-mesh.compute_vertex_normals()
-```
-
-### 🔹 Laplacian Smoothing
-
-```python
-mesh_smooth = mesh.filter_smooth_laplacian(30)
-o3d.visualization.draw(mesh_smooth)
-```
-
-### 🔹 Mesh Simplification
-
-```python
-mesh_s = mesh.simplify_quadric_decimation(10000)
-o3d.visualization.draw(mesh_s)
-```
-
----
-
-## 🟦 Sampling
-
-Convert mesh → point cloud.
-
-```python
-pcd = mesh.sample_points_poisson_disk(50000)
-o3d.visualization.draw(pcd)
-```
-
----
-
-## 🟦 RGBD Handling
-
-Convert RGB + Depth images into point clouds.
-
-```python
-color = o3d.io.read_image("color.png")
-depth = o3d.io.read_image("depth.png")
-
-rgbd = o3d.geometry.RGBDImage.create_from_color_and_depth(color, depth)
-pcd = o3d.geometry.PointCloud.create_from_rgbd_image(
-    rgbd, o3d.camera.PinholeCameraIntrinsic.o3d_camera_default)
-```
-
----
-
-## 🟦 Voxelization
-
-Convert mesh into voxel grid.
-
-```python
-voxel = o3d.geometry.VoxelGrid.create_from_triangle_mesh(mesh, voxel_size=0.05)
-o3d.visualization.draw(voxel)
-```
-
----
-
-## 🟦 Octree
-
-Spatial partitioning for large point clouds.
-
-```python
-octree = o3d.geometry.Octree(max_depth=4)
-octree.convert_from_point_cloud(pcd)
-o3d.visualization.draw(octree)
-```
-
----
-
-## 🟦 Surface Reconstruction
-
-### 🔹 Poisson Reconstruction
-
-```python
-pcd.estimate_normals()
-mesh_poisson, _ = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(pcd, depth=10)
-o3d.visualization.draw(mesh_poisson)
-```
-
----
-
-## 🟦 Transformations
-
-### Translate
-
-```python
-pcd.translate((1, 0, 0))
-```
-
-### Rotate
-
-```python
-R = pcd.get_rotation_matrix_from_xyz((0, 0, 1.57))
-pcd.rotate(R)
-```
-
-### Scale
-
-```python
-pcd.scale(2.0, center=pcd.get_center())
-```
-
----
-
-## 🟦 Mesh Deformation
-
-```python
-mesh.compute_vertex_normals()
-mesh.vertices = o3d.utility.Vector3dVector(
-    np.asarray(mesh.vertices) + 0.1*np.random.randn(len(mesh.vertices),3))
-```
-
----
-
-## 🟦 Intrinsic Shape Signatures
-
-Used for key‑point detection.
-
-```python
-detector = o3d.geometry.keypoint.compute_iss_keypoints(pcd)
-o3d.visualization.draw([pcd, detector])
-```
-
----
-
-## 🟦 Ray Casting
-
-Used for collision detection.
-
-```python
-scene = o3d.t.geometry.RaycastingScene()
-id = scene.add_triangles(o3d.t.geometry.TriangleMesh.from_legacy(mesh))
-```
-
----
-
-## 🟦 Registration (ICP)
-
-Align two point clouds.
-
-```python
-result = o3d.pipelines.registration.registration_icp(
-    source, target, 0.02, np.eye(4))
-```
-
----
-
-## 🟦 Visualization
-
-Basic visualization:
-
-```python
-o3d.visualization.draw(pcd)
-```
-
-### 🔹 Non‑Blocking Visualizer
-
-```python
-vis = o3d.visualization.Visualizer()
-vis.create_window()
-vis.add_geometry(pcd)
-for i in range(100):
-    pcd.translate((0.01,0,0))
-    vis.update_geometry(pcd)
-    vis.poll_events()
-    vis.update_renderer()
-vis.destroy_window()
-```
-
----
-
-## 🟦 Web Visualizer
-
-```bash
-python -m open3d.visualization.webrtc_server --scene test.ply
-```
-
----
-
-## 🟦 Built‑in Datasets
-
-Includes points, meshes, textures:
-
-* Armadillo, Eagle, Bunny
-* Living Room / Office RGBD datasets
-* Monkey, Sword, Helmet models
-
----
-
-## 🟦 Important Techniques
-
-| Technique              | Use                    |
-| ---------------------- | ---------------------- |
-| KD‑Tree                | Fast nearest neighbors |
-| Normal Estimation      | Surface orientation    |
-| Registration           | Align point clouds     |
-| Octree                 | Large cloud search     |
-| Alpha Shapes           | Reconstruction         |
-| Ball Pivoting          | Smooth surface         |
-| Poisson Reconstruction | Fill gaps              |
-| Mesh Deformation       | Animation              |
-| ISS                    | Recognition            |
-| Ray Casting            | Collision detection    |
-| UV Mapping             | Texturing              |
-
----
-
-## ⭐ Final Notes

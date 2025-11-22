@@ -140,7 +140,7 @@ These components together define the **height, width, and depth** of a 3D object
 
 ## 🔧 Load & Visualize a 3D Mesh with Open3D
 
-
+```python
 import open3d as o3d
 
 # Load a 3D mesh file
@@ -218,6 +218,8 @@ model.compute_vertex_normals()
 
 # Visualize the 3D model
 o3d.visualization.draw(model)
+
+```
 ---
 # 🟦 Voxel Downsampling — 3D Point Cloud Preprocessing
 
@@ -251,7 +253,7 @@ print("Downsampled points:", np.asarray(downsampled_pcd.points).shape[0])
 
 # Visualize the downsampled point cloud
 o3d.visualization.draw(downsampled_pcd)
-
+```
 # 🟦 Open3D Library — Overview
 
 [Open3D](http://www.open3d.org/) is an open-source library designed for **3D data processing**, primarily **point clouds, meshes, and RGB-D images**.  
@@ -327,7 +329,7 @@ o3d.visualization.draw(pcd_down)
 
 Meshes are the **structural backbone of 3D models**.  
 Open3D provides a variety of operations to process, analyze, and manipulate meshes efficiently.
-
+```
 ---
 
 ## 🔧 Common Mesh Operations
@@ -400,7 +402,7 @@ o3d.visualization.draw(mesh_simplified)
 
 **RGB-D images** contain both **color (RGB)** and **depth (D)** information.  
 They are commonly used in **3D reconstruction, robotics, and computer vision**.
-
+```
 ---
 
 ## 🔹 Supported Datasets
@@ -449,7 +451,7 @@ pcd = o3d.geometry.PointCloud.create_from_rgbd_image(
 
 # Visualize the point cloud
 o3d.visualization.draw(pcd)
-
+```
 # 🟦 KD-Tree — Nearest Neighbor Search in Point Clouds
 
 A **KD-Tree (K-Dimensional Tree)** is a spatial data structure used to **efficiently find nearest neighbors** in multidimensional data, such as **3D point clouds**.  
@@ -484,7 +486,7 @@ print("Distances to nearest neighbors:", dist)
 
 Real-world **point clouds** often contain **noise or outliers** introduced by sensors such as LiDAR or depth cameras.  
 Open3D provides several techniques to **clean point clouds** for better processing and analysis.
-
+```
 ---
 
 ## 🔹 Common Techniques for Outlier Removal
@@ -521,7 +523,7 @@ print("Points after cleaning:", len(pcd_clean.points))
 # Visualize original and cleaned point cloud
 o3d.visualization.draw(pcd)
 o3d.visualization.draw(pcd_clean)
-
+```
 # 🟦 Voxelization — 3D Point Cloud & Mesh
 
 **Voxelization** is the process of converting **3D data** (point clouds or meshes) into a **regular grid of voxels**.  
@@ -563,7 +565,7 @@ voxel_grid = o3d.geometry.VoxelGrid.create_from_triangle_mesh(mesh, voxel_size=v
 
 # Visualize voxel grid
 o3d.visualization.draw(voxel_grid)
-
+```
 # 🟦 Inclusion Test — Voxel Grid
 
 **Inclusion Test** is a technique to check whether points are **inside an occupied voxel** in a voxel grid.  
@@ -606,7 +608,7 @@ else:
 
 **Voxel Carving** is a technique used to reconstruct a **3D shape** by removing empty space from a voxel grid using **depth maps or multiple views**.  
 It is widely used in **3D reconstruction, computer vision, and robotics**.
-
+```
 ---
 
 ## 🔹 How It Works
@@ -634,7 +636,7 @@ for voxel in voxel_grid:
         # If voxel is in front of surface in depth map, mark as empty
         if voxel_in_free_space(pixel, depth_map):
             voxel_grid.remove(voxel)
-
+```
 # 🟦 Octree — 3D Spatial Data Structure
 
 An **Octree** is a hierarchical data structure used to **partition 3D space**.  
@@ -674,7 +676,7 @@ octree.convert_from_point_cloud(pcd, size_expand=0.01)
 
 # Visualize octree
 o3d.visualization.draw(octree)
-
+```
 # 🟦 Surface Reconstruction — 3D Point Clouds & Meshes
 
 **Surface Reconstruction** is the process of creating a **continuous surface** from a set of points or an irregular mesh.  
@@ -728,7 +730,7 @@ mesh, densities = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(pcd,
 
 # Visualize reconstructed mesh
 o3d.visualization.draw(mesh)
-
+```
 # 🟦 3D Transformations — Translate, Rotate, Scale
 
 **Transformations** are used to manipulate 3D data (point clouds or meshes) by changing their **position, orientation, or size**.
@@ -755,7 +757,7 @@ pcd.translate(translation)
 
 # Visualize
 o3d.visualization.draw(pcd)
-
+```
 # 🟦 Intrinsic Shape Signature & Ray Casting
 
 This section covers **object recognition using shape descriptors** and **ray casting for collision detection** in 3D space.
@@ -781,7 +783,7 @@ keypoints = o3d.geometry.keypoint.compute_iss_keypoints(pcd)
 
 # Visualize keypoints
 o3d.visualization.draw(keypoints)
-
+```
 # 🟦 Distance Queries — 3D Objects
 
 **Distance Queries** are used to measure **how far a point or object is from a 3D surface or point cloud**.  
@@ -817,7 +819,7 @@ distances = np.linalg.norm(np.asarray(pcd.points) - query_point, axis=1)
 # Find minimum distance
 min_distance = distances.min()
 print(f"Minimum distance from query point to point cloud: {min_distance}")
-
+```
 # 🟦 UV Mapping — 3D to 2D Texture Mapping
 
 **UV Mapping** is the process of **mapping a 3D object’s surface to a 2D plane**.  
@@ -855,7 +857,7 @@ else:
 
 # Visualization (Open3D does not directly show UV maps)
 o3d.visualization.draw(mesh)
-
+```
 # 🟦 Open3D Built-in Datasets
 
 Open3D provides several **built-in datasets** for testing, learning, and demonstration purposes.  
@@ -897,7 +899,7 @@ pcd = o3d.io.read_point_cloud(pcd_data.path)
 
 # Visualize point cloud
 o3d.visualization.draw(pcd)
-
+```
 # 🟦 Open3D Built-in Models, Textures, Images, and Demos
 
 Open3D provides a rich set of **built-in assets** for testing, learning, and demonstration.  
@@ -971,7 +973,7 @@ pcd = o3d.io.read_point_cloud(demo_data.paths[0])
 
 # Visualize the point cloud
 o3d.visualization.draw(pcd)
-
+```
 # 🟦 Basic Visualization in Open3D
 
 Open3D provides simple functions to **visualize 3D geometries** such as point clouds, meshes, and line sets.
@@ -1010,7 +1012,7 @@ line_set = o3d.geometry.LineSet(
     lines=o3d.utility.Vector2iVector(lines),
 )
 o3d.visualization.draw(line_set)
-
+```
 # 🟦 Customized Visualization in Open3D
 
 Open3D allows **customizing the visualization** of 3D objects for better analysis, presentation, and interaction.
@@ -1042,7 +1044,7 @@ def rotate_view(vis):
 
 # Visualize with animation callback
 o3d.visualization.draw_geometries_with_animation_callback([mesh], rotate_view)
-
+```
 # 🟦 Apply Texture to Mesh in Open3D
 
 Open3D allows you to **apply textures to 3D meshes** for realistic visualization.
@@ -1073,7 +1075,7 @@ mesh.textures = [texture]
 
 # Visualize textured mesh
 o3d.visualization.draw([mesh])
-
+```
 # 🟦 Interactive Visualization in Open3D
 
 Open3D supports **interactive visualization**, allowing you to **explore and manipulate 3D data in real-time**.
@@ -1112,7 +1114,7 @@ for i in range(100):
 
 # Close window
 vis.destroy_window()
-
+```
 # 🟦 Non-Blocking Visualization in Open3D
 
 Non-blocking visualization allows you to **display 3D data without halting your program**, making it ideal for **real-time applications**.
@@ -1151,7 +1153,7 @@ for i in range(50):
 
 # Close window
 vis.destroy_window()
-
+```
 # 🟦 Headless Rendering in Open3D
 
 **Headless rendering** allows Open3D to **render 3D scenes without a display (GUI)**.  
@@ -1197,7 +1199,7 @@ render.scene.add_geometry("mesh", mesh, o3d.visualization.rendering.MaterialReco
 # Capture image
 img = render.render_to_image()
 o3d.io.write_image("headless_render.png", img)
-
+```
 # 🟦 Web Visualizer in Open3D
 
 Open3D provides a **Web Visualizer** to explore and interact with 3D data **directly in a web browser**.  
@@ -1237,7 +1239,7 @@ o3d.visualization.gui.Application.instance.initialize()
 web_vis = o3d.visualization.O3DVisualizer("Web 3D Viewer", 1024, 768)
 web_vis.add_geometry("point_cloud", pcd)
 o3d.visualization.gui.Application.instance.run()
-
+```
 # 🟦 Web Visualizer (Jupyter Mode) in Open3D
 
 Open3D allows you to **visualize 3D data interactively directly inside Jupyter notebooks**.  
@@ -1265,7 +1267,7 @@ pcd = o3d.io.read_point_cloud("test.pcd")
 
 # Visualize point cloud interactively in Jupyter
 web.draw(pcd)
-
+```
 # 🟦 Open3D for TensorBoard
 
 Open3D can be integrated with **TensorBoard** to visualize 3D data during **deep learning training**.  
@@ -1307,7 +1309,7 @@ writer.add_mesh("PointCloud/GroundTruth", vertices=gt_np)
 writer.add_mesh("PointCloud/Prediction", vertices=pred_np)
 
 writer.close()
-
+```
 # 🟦 Important Open3D Terms & Techniques
 
 This section summarizes **key terms, techniques, and their usage** in Open3D for 3D point cloud, mesh, and model processing.

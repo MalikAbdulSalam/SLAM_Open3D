@@ -233,6 +233,7 @@ This reduces the **total number of points** in the point cloud, which helps:
 - ✅ Remove redundant information  
 
 ---
+![Alt Text](images/voxel_downsampling.jpeg)
 
 ## 🔧 Example: Voxel Downsampling with Open3D
 

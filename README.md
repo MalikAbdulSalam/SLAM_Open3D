@@ -93,7 +93,7 @@ Used to reduce the number of points for faster computation.
 pcd_down = pcd.voxel_down_sample(voxel_size=0.02)
 o3d.visualization.draw(pcd_down)
 ```
-
+![Alt Text](images/voxel_downsampling.jpeg)
 ---
 
 # 🟦 3D Mesh — Overview & Open3D Guide
@@ -535,7 +535,7 @@ A voxel is a **3D equivalent of a pixel** — a small cube that represents space
 - **Point Clouds and Meshes** are flexible but have irregular shapes  
 - **Voxels** provide a **regular, uniform representation** of 3D space  
 - Useful for **3D deep learning, occupancy grids, collision detection, and simulation**
-
+![Alt Text](images/voxelization.jpg)
 ---
 
 ## 🔹 How It Works
@@ -640,6 +640,7 @@ for voxel in voxel_grid:
 
 An **Octree** is a hierarchical data structure used to **partition 3D space**.  
 It recursively divides a 3D volume into **eight smaller cubes (nodes)**, which can further subdivide as needed.
+![Alt Text](images/voxelization.jpg)
 
 ---
 
@@ -739,6 +740,7 @@ o3d.visualization.draw(mesh)
 ## 🔹 1. Translation
 - Moves the object along the **X, Y, and Z axes**  
 - Useful for repositioning point clouds or meshes  
+![Alt Text](images/transtalion.png)
 
 ### 🔧 Example: Translation
 ```python

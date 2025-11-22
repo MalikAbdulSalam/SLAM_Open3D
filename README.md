@@ -218,7 +218,7 @@ model.compute_vertex_normals()
 
 # Visualize the 3D model
 o3d.visualization.draw(model)
-
+---
 # 🟦 Voxel Downsampling — 3D Point Cloud Preprocessing
 
 **Voxel Downsampling** is a common preprocessing technique in 3D point cloud processing.  

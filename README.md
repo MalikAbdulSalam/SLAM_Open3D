@@ -640,7 +640,7 @@ for voxel in voxel_grid:
 
 An **Octree** is a hierarchical data structure used to **partition 3D space**.  
 It recursively divides a 3D volume into **eight smaller cubes (nodes)**, which can further subdivide as needed.
-![Alt Text](images/voxelization.jpg)
+![Alt Text](images/octree.jpeg)
 
 ---
 

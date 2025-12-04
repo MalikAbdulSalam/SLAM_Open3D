@@ -1669,7 +1669,7 @@ Modern SLAM uses **LiDAR + Camera** fusion.
 - Limited range  
 - Sensitive to sunlight  
 - Good for indoor applications  
-![Alt Text](images/visual_salam_type.png)
+![Alt Text](images/visual-type.png)
 
 ---
 

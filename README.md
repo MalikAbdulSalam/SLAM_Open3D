@@ -1470,7 +1470,7 @@ Includes the following major systems:
 - **Spatial Coordinate Error SLAM**.  
 - Uses **semantic data + geometric data**.  
 - Provides strong performance in changing or dynamic environments.
-![Alt Text](images/rce.png)
+![Alt Text](images/sce.png)
 
 ---
 # SLAM (Simultaneous Localization and Mapping)

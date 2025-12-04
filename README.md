@@ -1372,3 +1372,45 @@ These terms cover **core concepts, algorithms, and operations in Open3D**, usefu
 
 ---
 
+# SLAM – Simultaneous Localization and Mapping
+
+SLAM (Simultaneous Localization and Mapping) allows a robot to **build a map of an unknown environment** while **estimating its own position** within that map.  
+It enables navigation in unfamiliar environments and is fundamentally a **probabilistic state estimation problem**.
+
+---
+
+## Techniques Used in SLAM
+
+- **Kalman Filters**  
+  Used in linear or mildly non-linear systems (e.g., EKF-SLAM).
+
+- **Particle Filters**  
+  Handle highly non-linear and non-Gaussian problems (e.g., FastSLAM).
+
+- **Covariance Intersection**  
+  Fuses uncertain measurements without knowing correlations.
+
+- **Graph SLAM**  
+  Represents robot poses and constraints as a graph and solves using optimization.
+
+---
+
+## Sensors Used in SLAM
+
+- **Odometer**
+- **LiDAR (Light Detection and Ranging)**
+- **RGB-D Cameras**
+- **Wheel Encoders**
+- **Inertial Measurement Units (IMU)**
+
+---
+
+## Problems Solved by SLAM
+
+- **Map Creation** – Building a map of the environment.  
+- **Localization** – Estimating the robot’s location within the map.  
+- **Continuous Updates** – Refining the map and robot pose as it moves.
+
+---
+
+

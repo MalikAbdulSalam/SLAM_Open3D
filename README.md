@@ -1,4 +1,4 @@
-# SLAM_Open3D
+# SLAM – Simultaneous Localization and Mapping and 3D Computer Vision
 # Open3D – Complete Guide with Examples
 ---
 

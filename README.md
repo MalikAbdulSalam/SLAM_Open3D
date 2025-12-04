@@ -1394,7 +1394,7 @@ It enables navigation in unfamiliar environments and is fundamentally a **probab
   Represents robot poses and constraints as a graph and solves using optimization.
 
 ---
-
+![Alt Text](images/1.jpeg)
 ## Sensors Used in SLAM
 
 - **Odometer**
@@ -1404,7 +1404,7 @@ It enables navigation in unfamiliar environments and is fundamentally a **probab
 - **Inertial Measurement Units (IMU)**
 
 ---
-
+![Alt Text](images/history.png)
 ## Problems Solved by SLAM
 
 - **Map Creation** – Building a map of the environment.  
@@ -1432,6 +1432,7 @@ Includes the following major systems:
 - Uses ORB (Oriented FAST and Rotated BRIEF) features.  
 - Available versions: **ORB-SLAM2**, **ORB-SLAM3**.  
 - Supports monocular, stereo, and RGBD cameras.
+![Alt Text](images/orb.png)
 
 ---
 
@@ -1441,6 +1442,7 @@ Includes the following major systems:
 - Low computational demand.  
 - Performs well under varying lighting conditions.  
 - Suitable for long-term operation in dynamic environments.
+![Alt Text](images/rovio.png)
 
 ---
 
@@ -1451,6 +1453,7 @@ Includes the following major systems:
 - Robust to dynamic scenes and lighting changes.  
 - Produces **3D maps** with **semantic understanding**.  
 - Uses visual + inertial data.
+![Alt Text](images/kemera.png)
 
 ---
 
@@ -1459,6 +1462,7 @@ Includes the following major systems:
 - Generates **dense 3D maps**.  
 - Works best in **short-range** environments.  
 - Ideal for indoor robots and AR applications.
+![Alt Text](images/rgbd.png)
 
 ---
 
@@ -1466,6 +1470,7 @@ Includes the following major systems:
 - **Spatial Coordinate Error SLAM**.  
 - Uses **semantic data + geometric data**.  
 - Provides strong performance in changing or dynamic environments.
+![Alt Text](images/rce.png)
 
 ---
 # SLAM (Simultaneous Localization and Mapping)
@@ -1516,6 +1521,7 @@ Real-world environments are **non-linear**, making graph-based techniques more r
 - Examples:
   - **EKF-SLAM**
   - Early versions of **FastSLAM**
+![Alt Text](images/kalman.png)
 
 ---
 
@@ -1632,6 +1638,7 @@ Modern SLAM uses **LiDAR + Camera** fusion.
 - Sensitive to lighting & motion blur  
 
 ---
+![Alt Text](images/visual.png)
 
 # Types of Visual SLAM
 
@@ -1662,6 +1669,7 @@ Modern SLAM uses **LiDAR + Camera** fusion.
 - Limited range  
 - Sensitive to sunlight  
 - Good for indoor applications  
+![Alt Text](images/visual_salam_type.png)
 
 ---
 

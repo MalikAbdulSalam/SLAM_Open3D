@@ -1412,5 +1412,425 @@ It enables navigation in unfamiliar environments and is fundamentally a **probab
 - **Continuous Updates** – Refining the map and robot pose as it moves.
 
 ---
+## Types of SLAM
+
+### **Visual SLAM (V-SLAM)**
+Uses camera-based data to localize the robot and build a map.
+
+Includes the following major systems:
+
+1. **ORB-SLAM**  
+2. **ROVIO-SLAM**  
+3. **Kimera-SLAM**  
+4. **RGB-D SLAM**  
+5. **SCE-SLAM**
+
+---
+
+### **1. ORB-SLAM**
+- Framework for Visual SLAM.  
+- Uses ORB (Oriented FAST and Rotated BRIEF) features.  
+- Available versions: **ORB-SLAM2**, **ORB-SLAM3**.  
+- Supports monocular, stereo, and RGBD cameras.
+
+---
+
+### **2. ROVIO-SLAM**
+- Robust Visual-Inertial Odometry SLAM.  
+- Integrates **visual data + IMU data**.  
+- Low computational demand.  
+- Performs well under varying lighting conditions.  
+- Suitable for long-term operation in dynamic environments.
+
+---
+
+### **3. Kimera-SLAM**
+- Real-time **metric-semantic SLAM** system.  
+- Built on top of ORB-SLAM, VINS-Mono, OKVIS, and ROVIO.  
+- Works for both **indoor and outdoor** environments.  
+- Robust to dynamic scenes and lighting changes.  
+- Produces **3D maps** with **semantic understanding**.  
+- Uses visual + inertial data.
+
+---
+
+### **4. RGB-D SLAM**
+- Uses **color + depth (RGB-D)** camera data.  
+- Generates **dense 3D maps**.  
+- Works best in **short-range** environments.  
+- Ideal for indoor robots and AR applications.
+
+---
+
+### **5. SCE-SLAM**
+- **Spatial Coordinate Error SLAM**.  
+- Uses **semantic data + geometric data**.  
+- Provides strong performance in changing or dynamic environments.
+
+---
+# SLAM (Simultaneous Localization and Mapping)
+
+SLAM enables a robot to **build a map** of an unknown environment while **localizing itself** within that map.  
+It is a core component in robotics, drones, self-driving cars, AR/VR, and mapping systems.  
+SLAM is fundamentally a **probabilistic state estimation problem**.
+
+---
+
+# Categories Based on Mathematical Model
+
+1. **Linear Gaussian System**
+2. **Non-Linear Gaussian System**
+3. **Non-Linear Non-Gaussian System**
+
+---
+
+# Graph-Based SLAM
+
+Real-world environments are **non-linear**, making graph-based techniques more robust than traditional filtering approaches.
+
+### Graph Components
+- **Nodes**
+  - Robot Pose  
+    - At time *t*:  
+      - 2D → *(x, y, θ)*  
+  - Landmarks  
+    - Fixed features → *(x, y)*
+
+- **Edges (Constraints)**
+  - **Odometry Edge**:  
+    Estimated motion → *(Δx, Δy, Δθ)*
+  - **Observation Edge**:  
+    Sensor measurement of landmarks
+  - **Loop Closure**:  
+    Detecting revisited locations
+
+---
+
+# Major SLAM Algorithm Types
+
+## **1. Kalman Filter Based Approaches**
+- Earliest SLAM techniques  
+- Recursive state estimation  
+- Uses EKF for non-linearity  
+- **Good for small maps**, poor for large
+- Examples:
+  - **EKF-SLAM**
+  - Early versions of **FastSLAM**
+
+---
+
+## **2. Particle Filter Based Approaches**
+- Probabilistic framework  
+- Handles **non-Gaussian & non-linear models**  
+- Multi-modal distribution  
+- Robust to non-linear motion and observations  
+- High computational load  
+- Lower accuracy than graph-based  
+- Examples:
+  - **FastSLAM 1.0**
+  - **FastSLAM 2.0**
+  - **GMapping (ROS)**
+  - **TinySLAM**
+
+---
+
+## **3. Graph-Based Approaches**
+- Nodes → robot poses & landmarks  
+- Edges → spatial constraints  
+- Edge weights → uncertainty  
+- Superior accuracy  
+- Supports delayed sensor data  
+- Strong loop closure  
+- Examples:
+  - **g2o**
+  - **Cartographer**
+  - **RTAB-Map**
+  - **ORB-SLAM2 / ORB-SLAM3**
+  - **Kimera**
+
+### Graph-Based Pipeline
+1. **Frontend**
+   - Data association  
+   - Graph construction  
+2. **Backend**
+   - Graph optimization  
+   - (e.g., g2o, GSLAM, iSAM2)
+
+---
+
+# SLAM Techniques Based on Use Case
+
+### **Indoor Robots**
+- Particle-based  
+- Graph-based  
+
+### **Drones**
+- Visual-Inertial  
+- Graph-based  
+
+### **Autonomous Cars**
+- Graph-based + Sensor Fusion  
+
+### **AR / VR**
+- Visual graph-based
+
+---
+
+# Comparison Table
+
+| SLAM Type | Environment | Noise | Accuracy | Computation | Best For |
+|----------|-------------|-------|----------|-------------|----------|
+| **Kalman Filter** | Small | Gaussian | Medium | Low | Simple robots, real-time |
+| **Particle Filter** | Medium | Non-Gaussian | High | Medium/High | Robots in uncertain environments |
+| **Graph-Based** | Large | Any | Very High | High | Autonomous vehicles, drones, large-scale mapping |
+
+---
+
+# Multi-Sensor Fusion SLAM
+
+Modern SLAM uses **LiDAR + Camera** fusion.
+
+### Why Multi-Sensors?
+| Sensor | Advantages |
+|--------|------------|
+| **LiDAR** | Geometric + distance info, works in low light, good in textureless environments |
+| **Camera** | Rich semantic + color info, object recognition, scene understanding |
+
+---
+
+# LiDAR–Camera Fusion SLAM Pipeline
+
+## **1. Frontend**
+- Data preprocessing  
+  - Calibration  
+  - Undistortion  
+  - Feature extraction  
+- System Initialization  
+  - Initial pose, scale, sensor biases  
+- Data Association  
+  - Spatial & temporal alignment  
+  - LiDAR points ↔ camera features  
+
+## **2. Backend**
+- Sensor Fusion  
+  - EKF  
+  - UKF  
+  - Graph optimization  
+- Pose estimation & mapping  
+- Loop closure detection  
+
+---
+
+# Visual SLAM – Camera Based
+
+- Depends only on camera data  
+- Uses feature detectors: **ORB, SIFT, FAST**  
+- Pose estimation via feature matching  
+- Continuous map updates using bundle adjustment  
+- Closure detection is challenging  
+- Deep learning improves loop closure & robustness  
+- Sensitive to lighting & motion blur  
+
+---
+
+# Types of Visual SLAM
+
+## **1. Monocular SLAM**
+- Single camera  
+- Scale ambiguity  
+- Techniques:  
+  - **Feature-based**  
+  - **Direct method**  
+- Pros:  
+  - Low hardware cost  
+  - Fast  
+- Cons:  
+  - Limited accuracy in large environments  
+
+---
+
+## **2. Stereo SLAM**
+- Two cameras with fixed baseline  
+- Depth via triangulation  
+- Used in autonomous vehicles & AR  
+
+---
+
+## **3. RGB-D SLAM**
+- Color + depth  
+- Dense 3D maps  
+- Limited range  
+- Sensitive to sunlight  
+- Good for indoor applications  
+
+---
+
+# Camera Specifications for Effective SLAM
+
+### a) Frame Rate
+- 15 FPS → slow robots  
+- 30 FPS → vehicles  
+- 50+ FPS → fast motion  
+
+### b) Field of View
+- >100° for robotics  
+- Very wide FOV → distortion  
+
+### c) Shutter Type
+- **Global shutter** → best for SLAM  
+- **Rolling shutter** → motion distortion  
+
+### d) Dynamic Range
+- Low DR → loss of features in bright/dark areas  
+
+---
+
+# LiDAR SLAM (History & Evolution)
+- LOAM → LeGO-LOAM → PNS-LeGO-SLAM  
+- Modern techniques use:  
+  - Factor graph optimization  
+  - Motion distortion compensation  
+  - Loop closure  
+  - Ground segmentation  
+  - Feature-based point cloud registration  
+
+---
+
+# Sensor Fusion for High Precision Mapping
+
+1. **LiDAR–IMU Calibration**
+2. **GNSS Integration**
+   - Loosely coupled  
+   - Tightly coupled  
+   - Multi-sensor fusion
+
+---
+
+# Performance Metrics (LiDAR SLAM)
+
+1. **ATE (Absolute Trajectory Error)**  
+2. **RTE (Relative Trajectory Error)**  
+3. **RMSE (Root Mean Square Error)**  
+
+High-performance SLAM achieves **ATE/RTE < 0.01**.
+
+---
+
+# Radar SLAM (Camera-Based Alternative)
+- Uses FMCW radar  
+- Works in adverse weather  
+- Lower feature density  
+- Higher noise  
+
+---
+
+# Event-Based SLAM
+- Uses event cameras  
+- Detects pixel-level brightness changes  
+- High temporal resolution  
+- Zero motion blur  
+- Ideal for high-speed robotics  
+
+---
+
+# Omnidirectional SLAM
+- Uses 360° cameras / multi-cameras  
+- Better loop closure  
+- Better feature tracking  
+- Example: **MCOV-SLAM**
+
+---
+
+# IMU in SLAM
+- Provides acceleration + angular velocity  
+- Improves localization  
+- Essential in drones & autonomous vehicles  
+- Challenges: drift, frequent recalibration  
+
+### IMU Applications
+- GPS-denied environments  
+- Indoor mobile mapping  
+- Underwater SLAM  
+- LiDAR-IMU SLAM  
+
+---
+
+# GNSS in SLAM
+- Improves large-scale localization  
+- Integration:  
+  - Loosely coupled  
+  - Tightly coupled  
+  - Multi-sensor fusion  
+- Helps reduce drift  
+- Robust in harsh environments  
+
+---
+
+# SLAM Frontend & Backend
+
+## **Frontend**
+- Perception module  
+- Feature extraction  
+- Data association  
+- Odometry estimation  
+
+## **Backend**
+- Optimize trajectory & map  
+- Error correction  
+- Loop closure  
+- Map estimation  
+
+---
+
+# Real-Time vs Post-Processing SLAM
+
+| Type | Use | Speed | Accuracy | Application |
+|------|------|--------|-----------|--------------|
+| **Real-Time SLAM** | Navigation | Fast | Moderate | Robots, drones |
+| **Post-Processing SLAM** | Mapping | Slow | High | Survey, research |
+
+---
+
+# Popular SLAM Frameworks
+
+## **Real-Time**
+- ROS / ROS2  
+- RTAB-Map  
+- ORB-SLAM3  
+- VINS-Mono / VINS-Fusion  
+- Cartographer  
+- LiO-SLAM  
+
+## **Research / Optimization**
+- GTSAM  
+- G2O  
+- Ceres Solver  
+- OpenVSLAM  
+- MapLab  
+- Kimera  
+- OpenSFM  
+
+## **Classic Frameworks**
+- Gmapping  
+- TinySLAM  
+- GSLAM  
+- ScaViSLAM  
+
+---
+
+# Practice Resources
+- ROS2  
+- openslam.org  
+- Gmapping  
+- TinySLAM  
+- G2O  
+- ORB-SLAM  
+- OpenVSLAM  
+- GSLAM  
+- MapLab  
+- Kimera  
+- VINS-Fusion  
+
+---
 
 
